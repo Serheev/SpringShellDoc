@@ -7,6 +7,7 @@ import org.xml.sax.SAXParseException;
 import java.io.File;
 import java.io.IOException;
 
+import static com.serheev.springshelldoc.TestData.inputFile;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SchemaUtilTest {
@@ -14,7 +15,7 @@ class SchemaUtilTest {
 
     @Test
     void validateOK() throws IOException, SAXException {
-        SchemaUtil.validate(new File("in/usersWithMeals.xml"), xmlSchema);
+        SchemaUtil.validate(inputFile, xmlSchema);
     }
 
     @Test

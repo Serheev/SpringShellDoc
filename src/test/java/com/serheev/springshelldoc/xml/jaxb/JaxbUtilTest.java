@@ -17,13 +17,13 @@ public class JaxbUtilTest {
 
     @Test
     public void processOK() throws JAXBException, IOException {
-        UsersWithMeals usersWithMeals = JaxbUtil.process(inputFile, Map.of());
+        UsersWithMeals usersWithMeals = JaxbUtil.process(inputFile, Map.of(), new File("out/jaxb.xml"));
         assertEquals(new UsersWithMeals.Users(getUsers()), usersWithMeals.getUsers());
     }
 
     @Test
     void processFiltered() throws IOException, JAXBException {
-        UsersWithMeals usersWithMeals = JaxbUtil.process(inputFile, paramsMap);
+        UsersWithMeals usersWithMeals = JaxbUtil.process(inputFile, paramsMap, new File("out/jaxbFiltered.xml"));
         assertEquals(new UsersWithMeals.Users(getFilteredUsers()), usersWithMeals.getUsers());
     }
 

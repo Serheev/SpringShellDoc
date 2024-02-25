@@ -27,7 +27,7 @@ public class Commands {
             @ShellOption(value = {"input", "-i"}, help = "Input file") File inputFile,
             @ShellOption(value = {"filter", "-f"}, help = "Filter params", defaultValue = "") List<String> params,
             @ShellOption(value = {"output", "-o"}, help = "Output file") File outputFile) throws JAXBException, IOException {
-        JaxbUtil.process(inputFile, parseParams(params));
+        JaxbUtil.process(inputFile, parseParams(params), outputFile);
     }
 
     @ShellMethod(key = "stax", value = "Process XML file via StAX")

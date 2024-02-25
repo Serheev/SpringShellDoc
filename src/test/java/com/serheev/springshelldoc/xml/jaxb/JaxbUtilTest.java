@@ -7,21 +7,28 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.util.Map;
 
 import static com.serheev.springshelldoc.TestData.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class JaxbUtilTest {
 
     @Test
-    public void unmarshalOK() throws JAXBException, IOException {
-        UsersWithMeals usersWithMeals = JaxbUtil.unmarshal(inputFile);
-        assertEquals(new UsersWithMeals.Users(List.of(user, admin, guest)), usersWithMeals.getUsers());
+    public void processOK() throws JAXBException, IOException {
+        UsersWithMeals usersWithMeals = JaxbUtil.process(inputFile, Map.of());
+        assertEquals(new UsersWithMeals.Users(getUsers()), usersWithMeals.getUsers());
     }
 
     @Test
-    void unmarshalNOK() {
+    void processFiltered() throws IOException, JAXBException {
+        UsersWithMeals usersWithMeals = JaxbUtil.process(inputFile, paramsMap);
+        assertEquals(new UsersWithMeals.Users(getFilteredUsers()), usersWithMeals.getUsers());
+    }
+
+    @Test
+    void processNOK() {
         assertThrows(UnmarshalException.class,
                 () -> JaxbUtil.unmarshal(new File("in/badXmlFile.xml")), "Except bad format exception");
     }

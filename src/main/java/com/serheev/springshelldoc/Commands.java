@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import static com.serheev.springshelldoc.util.Util.parseParams;
+
 @ShellComponent
 public class Commands {
     @ShellMethod(key = "xsd", value = "Validate XML file against XSD (XML Schema)")
@@ -25,8 +27,7 @@ public class Commands {
             @ShellOption(value = {"input", "-i"}, help = "Input file") File inputFile,
             @ShellOption(value = {"filter", "-f"}, help = "Filter params", defaultValue = "") List<String> params,
             @ShellOption(value = {"output", "-o"}, help = "Output file") File outputFile) throws JAXBException, IOException {
-        UsersWithMeals users = JaxbUtil.unmarshal(inputFile);
-        System.out.println(users);
+        JaxbUtil.process(inputFile, parseParams(params));
     }
 
     @ShellMethod(key = "stax", value = "Process XML file via StAX")

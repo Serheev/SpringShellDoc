@@ -7,7 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 /**
  * <p>Java class for anonymous complex type.
@@ -41,4 +43,12 @@ public class Meal {
     protected LocalDateTime dateTime;
     @XmlAttribute(name = "excess")
     protected Boolean excess;
+
+    public LocalDate getDate() {
+        return dateTime.toLocalDate();
+    }
+
+    public LocalTime getTime() {
+        return dateTime.toLocalTime();
+    }
 }

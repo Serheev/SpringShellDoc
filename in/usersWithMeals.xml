@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UsersWithMeals xmlns="http://serheev.com"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://serheev.com usersWithMeals.xsd">
+    <Users>
+        <User enabled="true" email="user@serheev.com" caloriesPerDay="2005" name="User"
+              password="password" registered="2024-01-01T13:00:00" roles="user">
+            <Meals>
+                <Meal calories="500" dateTime="2024-01-30T10:00:00">Breakfast</Meal>
+                <Meal calories="1000" dateTime="2024-01-30T13:00:00">Lunch</Meal>
+                <Meal calories="500" dateTime="2024-01-30T20:00:00">Dinner</Meal>
+                <Meal calories="100" dateTime="2024-01-31T00:00:00">Food to the limit</Meal>
+                <Meal calories="500" dateTime="2024-01-31T10:00:00">Breakfast</Meal>
+                <Meal calories="1000" dateTime="2024-01-31T13:00:00">Lunch</Meal>
+                <Meal calories="510" dateTime="2024-01-31T20:00:00">Dinner</Meal>
+            </Meals>
+        </User>
+        <User enabled="true" email="admin@serheev.com" caloriesPerDay="1900" name="Admin"
+              password="admin" registered="2024-01-01T13:00:00" roles="admin user">
+            <Meals>
+                <Meal calories="510" dateTime="2024-01-30T14:00:00">Admin Lunch</Meal>
+                <Meal calories="730" dateTime="2024-01-30T21:00:00">Admin Dinner</Meal>
+            </Meals>
+        </User>
+        <User enabled="false" email="guest@serheev.com" caloriesPerDay="2000" name="Guest"
+              password="guest" registered="2024-01-01T13:00:00">
+        </User>
+    </Users>
+</UsersWithMeals>

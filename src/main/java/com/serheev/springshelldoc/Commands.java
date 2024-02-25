@@ -1,10 +1,14 @@
 package com.serheev.springshelldoc;
 
+import com.serheev.springshelldoc.schema.UsersWithMeals;
+import com.serheev.springshelldoc.xml.jaxb.JaxbUtil;
+import jakarta.xml.bind.JAXBException;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @ShellComponent
@@ -20,10 +24,9 @@ public class Commands {
     public void jaxbProcess(
             @ShellOption(value = {"input", "-i"}, help = "Input file") File inputFile,
             @ShellOption(value = {"filter", "-f"}, help = "Filter params", defaultValue = "") List<String> params,
-            @ShellOption(value = {"output", "-o"}, help = "Output file") File outputFile) {
-        System.out.println("\nInput file: " + inputFile.getAbsolutePath());
-        System.out.println("Filter params: " + params.toString());
-        System.out.println("Output file: " + outputFile.getAbsolutePath());
+            @ShellOption(value = {"output", "-o"}, help = "Output file") File outputFile) throws JAXBException, IOException {
+        UsersWithMeals users = JaxbUtil.unmarshal(inputFile);
+        System.out.println(users);
     }
 
     @ShellMethod(key = "stax", value = "Process XML file via StAX")

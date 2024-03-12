@@ -1,11 +1,13 @@
 package com.serheev.springshelldoc.xml.jaxb;
 
 import com.serheev.springshelldoc.schema.ObjectFactory;
+import com.serheev.springshelldoc.schema.User;
 import com.serheev.springshelldoc.schema.UsersWithMeals;
 import com.serheev.springshelldoc.util.MealsUtil;
 import jakarta.xml.bind.JAXBException;
 import lombok.experimental.UtilityClass;
 
+import javax.xml.stream.XMLStreamReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
@@ -49,9 +51,13 @@ public class JaxbUtil {
         }
     }
 
-    public static void marshal(UsersWithMeals users, File outputXml) throws IOException, JAXBException {
+    public static User unmarshalUser(XMLStreamReader reader) throws JAXBException {
+        return unmarshaller.unmarshal(reader, User.class);
+    }
+
+    public static void marshal(Object instance, File outputXml) throws IOException, JAXBException {
         try (Writer writer = Files.newBufferedWriter(outputXml.toPath())) {
-            marshaller.marshal(users, writer);
+            marshaller.marshal(instance, writer);
         }
     }
 }

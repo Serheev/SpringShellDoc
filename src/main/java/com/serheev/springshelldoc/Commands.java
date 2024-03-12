@@ -1,12 +1,14 @@
 package com.serheev.springshelldoc;
 
-import com.serheev.springshelldoc.schema.UsersWithMeals;
 import com.serheev.springshelldoc.xml.jaxb.JaxbUtil;
+import com.serheev.springshelldoc.xml.stax.StaxUtil;
 import jakarta.xml.bind.JAXBException;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
+
+import javax.xml.stream.XMLStreamException;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -34,12 +36,9 @@ public class Commands {
     public void staxProcess(
             @ShellOption(value = {"input", "-i"}, help = "Input file") File inputFile,
             @ShellOption(value = {"email", "-e"}, help = "User email") String email,
-            @ShellOption(value = {"filters", "-f"}, help = "Filter params") List<String> params,
-            @ShellOption(value = {"output", "-o"}, help = "Output file") File outputFile) {
-        System.out.println("\nInput file: " + inputFile.getAbsolutePath());
-        System.out.println("Filter params: " + params.toString());
-        System.out.println("User email: " + email);
-        System.out.println("Output file: " + outputFile.getAbsolutePath());
+            @ShellOption(value = {"filters", "-f"}, help = "Filter params", defaultValue = "") List<String> params,
+            @ShellOption(value = {"output", "-o"}, help = "Output file") File outputFile) throws JAXBException, IOException, XMLStreamException {
+        StaxUtil.process(inputFile, parseParams(params), email, outputFile);
     }
 
     @ShellMethod(key = "xpath", value = "Evaluate XPath against XML")

@@ -2,13 +2,16 @@ package com.serheev.springshelldoc;
 
 import com.serheev.springshelldoc.xml.jaxb.JaxbUtil;
 import com.serheev.springshelldoc.xml.stax.StaxUtil;
+import com.serheev.springshelldoc.xml.xpath.XPathUtil;
 import jakarta.xml.bind.JAXBException;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
+import org.xml.sax.SAXException;
 
 
 import javax.xml.stream.XMLStreamException;
+import javax.xml.xpath.XPathExpressionException;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -44,9 +47,8 @@ public class Commands {
     @ShellMethod(key = "xpath", value = "Evaluate XPath against XML")
     public void xpathEvaluate(
             @ShellOption(value = {"input", "-i"}, help = "Input file") File inputFile,
-            @ShellOption(value = {"exp", "-e"}, help = "XPath expression") String xpathExpression) {
-        System.out.println("\nInput file: " + inputFile.getAbsolutePath());
-        System.out.println("XPath expression: " + xpathExpression);
+            @ShellOption(value = {"exp", "-e"}, help = "XPath expression") String xpathExpression) throws XPathExpressionException, IOException, SAXException {
+        XPathUtil.evaluate(inputFile, xpathExpression);
     }
 
     @ShellMethod(key = "xslt", value = "Transform XML with XSLT")

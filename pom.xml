@@ -23,6 +23,7 @@
         <jaxb.version>4.0.4</jaxb.version>
         <saxon.version>12.3</saxon.version>
         <fop.version>2.9</fop.version>
+        <itextpdf.version>8.0.1</itextpdf.version>
     </properties>
 
     <dependencies>
@@ -60,6 +61,14 @@
                     <artifactId>xml-apis</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <!--       iText PDF -->
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itext-core</artifactId>
+            <version>${itextpdf.version}</version>
+            <type>pom</type>
         </dependency>
 
         <dependency>

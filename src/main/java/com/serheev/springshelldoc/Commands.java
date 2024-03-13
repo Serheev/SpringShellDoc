@@ -1,5 +1,6 @@
 package com.serheev.springshelldoc;
 
+import com.serheev.springshelldoc.pdf.ITextPdfUtil;
 import com.serheev.springshelldoc.pdf.PdfFopUtil;
 import com.serheev.springshelldoc.xml.jaxb.JaxbUtil;
 import com.serheev.springshelldoc.xml.stax.StaxUtil;
@@ -75,10 +76,8 @@ public class Commands {
     public void pdfiTextConvert(
             @ShellOption(value = {"input", "-i"}, help = "Input file") File inputFile,
             @ShellOption(value = {"filter", "-f"}, help = "Filter params", defaultValue = "") List<String> params,
-            @ShellOption(value = {"output", "-o"}, help = "Output file") File outputFile) {
-        System.out.println("\nInput file: " + inputFile.getAbsolutePath());
-        System.out.println("Filter params: " + params.toString());
-        System.out.println("Output file: " + outputFile.getAbsolutePath());
+            @ShellOption(value = {"output", "-o"}, help = "Output file") File outputFile) throws JAXBException, IOException {
+        ITextPdfUtil.convert(inputFile, outputFile, parseParams(params));
     }
 
     @ShellMethod(key = "excel-poi", value = "Convert XML to Excel via Apache POI")

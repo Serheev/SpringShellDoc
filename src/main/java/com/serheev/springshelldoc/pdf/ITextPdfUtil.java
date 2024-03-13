@@ -2,6 +2,7 @@ package com.serheev.springshelldoc.pdf;
 
 import com.itextpdf.kernel.colors.Color;
 import com.itextpdf.kernel.colors.DeviceRgb;
+import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.pdf.canvas.draw.SolidLine;
 import com.itextpdf.layout.element.LineSeparator;
 import com.itextpdf.layout.element.Paragraph;
@@ -31,6 +32,8 @@ public class ITextPdfUtil {
         UsersWithMeals usersWithMeals = JaxbUtil.unmarshalAndFilter(inputFile, params);
         ITextPdfConverter.convert(outputFile,
                 document -> {
+                    PdfFont font = ITextPdfConverter.createRegisteredFont("Verdana");
+                    document.setFont(font);
                     document.add(new Paragraph().add(new Text("Users with meals").setFontSize(18)));
                     document.add(new LineSeparator(new SolidLine()).setMarginTop(4));
                     usersWithMeals.getUsers().getUser().forEach(user -> {

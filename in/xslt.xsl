@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0"
+<xsl:stylesheet version="2.0"
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:p="http://serheev.com"
@@ -28,7 +28,7 @@
                     <div style="font-size:large">
                         Email: <xsl:value-of select="@email"/><br/>
                         CaloriesPerDay: <xsl:value-of select="@caloriesPerDay"/><br/>
-                        Registered: <xsl:value-of select="@registered"/><br/>
+                        Registered: <xsl:value-of select="format-dateTime(@registered, '[Y0001]-[M01]-[D01] [H01]:[m01]')"/><br/>
                         Roles: <xsl:value-of select="@roles"/><br/>
                     </div>
                     <table border="1" cellpadding="8" cellspacing="0">
@@ -42,7 +42,7 @@
                         <xsl:variable name="currentEmail" select="@email"/>
                         <xsl:for-each select="/p:UsersWithMeals/p:Users/p:User[@email = $currentEmail]/p:Meals/p:Meal">
                             <tr>
-                                <td><xsl:value-of select="@dateTime"/></td>
+                                <td><xsl:value-of select="format-dateTime(@dateTime, '[Y0001]-[M01]-[D01] [H01]:[m01]')"/></td>
                                 <td><xsl:value-of select="."/></td>
                                 <td><xsl:value-of select="@calories"/></td>
                             </tr>

@@ -21,6 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <jaxb.version>4.0.4</jaxb.version>
+        <saxon.version>12.3</saxon.version>
     </properties>
 
     <dependencies>
@@ -28,6 +29,7 @@
             <groupId>org.springframework.shell</groupId>
             <artifactId>spring-shell-starter</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
@@ -37,6 +39,13 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+
+        <!--XSLT-->
+        <dependency>
+            <groupId>net.sf.saxon</groupId>
+            <artifactId>Saxon-HE</artifactId>
+            <version>${saxon.version}</version>
         </dependency>
 
         <dependency>

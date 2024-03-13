@@ -40,8 +40,15 @@
                             </tr>
                         </thead>
                         <xsl:variable name="currentEmail" select="@email"/>
-                        <xsl:for-each select="/p:UsersWithMeals/p:Users/p:User[@email = $currentEmail]/p:Meals/p:Meal">
-                            <tr>
+                        <xsl:variable name="meals" select="/p:UsersWithMeals/p:Users/p:User[@email = $currentEmail]/p:Meals/p:Meal"/>
+                        <xsl:for-each select="p:filter($meals, @caloriesPerDay)">
+                            <xsl:variable name="colour">
+                                <xsl:choose>
+                                    <xsl:when test="p:getExcess(@dateTime)">color:#FF0000</xsl:when>
+                                    <xsl:otherwise>color:#008000</xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:variable>
+                            <tr style="{$colour}">
                                 <td><xsl:value-of select="format-dateTime(@dateTime, '[Y0001]-[M01]-[D01] [H01]:[m01]')"/></td>
                                 <td><xsl:value-of select="."/></td>
                                 <td><xsl:value-of select="@calories"/></td>

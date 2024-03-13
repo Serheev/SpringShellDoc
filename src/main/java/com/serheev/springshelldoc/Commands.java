@@ -1,5 +1,6 @@
 package com.serheev.springshelldoc;
 
+import com.serheev.springshelldoc.pdf.PdfFopUtil;
 import com.serheev.springshelldoc.xml.jaxb.JaxbUtil;
 import com.serheev.springshelldoc.xml.stax.StaxUtil;
 import com.serheev.springshelldoc.xml.xpath.XPathUtil;
@@ -66,10 +67,8 @@ public class Commands {
     public void pdfFopConvert(
             @ShellOption(value = {"input", "-i"}, help = "Input file") File inputFile,
             @ShellOption(value = {"template", "-t"}, help = "Transform template file") File templateFile,
-            @ShellOption(value = {"output", "-o"}, help = "Output file") File outputFile) {
-        System.out.println("\nInput file: " + inputFile.getAbsolutePath());
-        System.out.println("Transform template file: " + templateFile);
-        System.out.println("Output file: " + outputFile.getAbsolutePath());
+            @ShellOption(value = {"output", "-o"}, help = "Output file") File outputFile) throws TransformerException {
+        PdfFopUtil.convert(inputFile, templateFile, outputFile);
     }
 
     @ShellMethod(key = "iText", value = "Convert XML to PDF via iText")

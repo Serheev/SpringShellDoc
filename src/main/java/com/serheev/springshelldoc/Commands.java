@@ -6,11 +6,11 @@ import com.serheev.springshelldoc.xml.stax.StaxUtil;
 import com.serheev.springshelldoc.xml.xpath.XPathUtil;
 import com.serheev.springshelldoc.xml.xslt.XsltUtil;
 import jakarta.xml.bind.JAXBException;
+import org.apache.fop.apps.FOPException;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 import org.xml.sax.SAXException;
-
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.transform.TransformerException;
@@ -67,7 +67,7 @@ public class Commands {
     public void pdfFopConvert(
             @ShellOption(value = {"input", "-i"}, help = "Input file") File inputFile,
             @ShellOption(value = {"template", "-t"}, help = "Transform template file") File templateFile,
-            @ShellOption(value = {"output", "-o"}, help = "Output file") File outputFile) throws TransformerException {
+            @ShellOption(value = {"output", "-o"}, help = "Output file") File outputFile) throws TransformerException, IOException, FOPException {
         PdfFopUtil.convert(inputFile, templateFile, outputFile);
     }
 

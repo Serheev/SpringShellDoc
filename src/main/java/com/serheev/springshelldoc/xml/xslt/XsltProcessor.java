@@ -6,7 +6,10 @@ import javax.xml.transform.*;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.File;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Map;
 
 public class XsltProcessor {
     static final TransformerFactory FACTORY = TransformerFactory.newInstance();
@@ -30,5 +33,17 @@ public class XsltProcessor {
 
     public void transform(Source xmlSource, Result outputTarget) throws TransformerException {
         xFormer.transform(xmlSource, outputTarget);
+    }
+
+    public void setParameters(Map<String, Object> params) {
+        params.forEach(this::setParameter);
+    }
+
+    public void setParameter(String name, Object value) {
+        if (value instanceof LocalTime time) {
+            xFormer.setParameter(name, time.format(DateTimeFormatter.ISO_LOCAL_TIME));
+        } else {
+            xFormer.setParameter(name, value);
+        }
     }
 }

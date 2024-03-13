@@ -59,7 +59,7 @@ public class Commands {
             @ShellOption(value = {"xsl", "-x"}, help = "XSL transformation file") File xslFile,
             @ShellOption(value = {"filter", "-f"}, help = "Filter params", defaultValue = "") List<String> params,
             @ShellOption(value = {"output", "-o"}, help = "Output file") File outputFile) throws TransformerException {
-        XsltUtil.transform(inputFile, xslFile, outputFile);
+        XsltUtil.transform(inputFile, xslFile, parseParams(params), outputFile);
     }
 
     @ShellMethod(key = "pdf-fop", value = "Convert XML to PDF via Apache FOP")

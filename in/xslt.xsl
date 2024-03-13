@@ -2,10 +2,16 @@
 <xsl:stylesheet version="2.0"
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:p="http://serheev.com"
                 xsi:schemaLocation="http://serheev.com usersWithMeals.xsd">
 
     <xsl:output method="html" omit-xml-declaration="yes" indent="yes"/>
+    <xsl:param name="startDate" as="xs:date" select="xs:date('1970-01-01')"/>
+    <xsl:param name="endDate" as="xs:date" select="xs:date('3000-12-31')"/>
+    <xsl:param name="startTime" as="xs:time" select="xs:time('00:00:00')"/>
+    <xsl:param name="endTime" as="xs:time" select="xs:time('23:59:59')"/>
+
     <xsl:template match="/">
         <html>
             <head>
@@ -41,7 +47,7 @@
                         </thead>
                         <xsl:variable name="currentEmail" select="@email"/>
                         <xsl:variable name="meals" select="/p:UsersWithMeals/p:Users/p:User[@email = $currentEmail]/p:Meals/p:Meal"/>
-                        <xsl:for-each select="p:filter($meals, @caloriesPerDay)">
+                        <xsl:for-each select="p:filter($meals, @caloriesPerDay, $startDate, $endDate, $startTime, $endTime)">
                             <xsl:variable name="colour">
                                 <xsl:choose>
                                     <xsl:when test="p:getExcess(@dateTime)">color:#FF0000</xsl:when>

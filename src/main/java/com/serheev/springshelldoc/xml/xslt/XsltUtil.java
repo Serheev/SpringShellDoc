@@ -13,10 +13,11 @@ public class XsltUtil {
     // thread safe
     private static final ThreadLocal<Map<LocalDateTime, Boolean>> excessMap = ThreadLocal.withInitial(HashMap::new);
 
-    public static void transform(File inputFile, File xslFile, File outputFile) throws TransformerException {
+    public static void transform(File inputFile, File xslFile, Map<String, Object> params, File outputFile) throws TransformerException {
         XsltProcessor.registerExtensionFunctions(new FilterMealsExtension(), new GetExcessExtension()); // before create processor!
 
         XsltProcessor processor = XsltProcessor.of(xslFile);
+        processor.setParameters(params);
         processor.transform(inputFile, outputFile);
         System.out.println("XSLT transformation completed successfully, result in " + outputFile.getAbsolutePath());
     }
